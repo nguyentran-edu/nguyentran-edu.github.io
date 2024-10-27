@@ -1,5 +1,5 @@
-let linkBackToLogInPage = "https://nguyentran-edu.github.io";
-let linkBackToToolPage = "https://nguyentran-edu.github.io/TieuHoc/IC3GS6LEVEL2.html";
+let linkBackToLogInPage = "https://nguyentran-edu.ic3gs6.com";
+let linkBackToToolPage = "https://nguyentran-edu.ic3gs6.com/TieuHoc/IC3GS6LEVEL2.html";
 let data1 = [];
 let user1 = "";
 let end_time1 = "";
