@@ -1,7 +1,7 @@
 // Get the modal
 let modal = document.getElementById('id01');
 let valueLevel = 0;
-let linkHomePage = "https://nguyentran-edu.github.io";
+let linkHomePage = "https://nguyentran-edu.ic3gs6.com";
 //Up
 let linkCongCuLuyenThiLevel1 = "";
 let linkCongCuLuyenThiLevel2 = "";
