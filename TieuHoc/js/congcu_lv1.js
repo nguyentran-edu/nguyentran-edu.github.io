@@ -1,4 +1,4 @@
-let linkHomePage = "https://nguyentran-edu.github.io";
+let linkHomePage = "https://nguyentran-edu.ic3gs6.com";
 let data1 = [];
 let user1 = "";
 let end_time1 = "";
