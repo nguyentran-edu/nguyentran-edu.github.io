@@ -112,13 +112,44 @@ function actionLoadListClassSearch(lstClassSearch){
     
     for(var i=0; i<lstClassSearch.length; i++){
         //up
-        if(lstClassSearch[i]["class"] == "ALL" || lstClassSearch[i]["class"] == "K7"){
+        if(lstClassSearch[i]["class"] == "K7"){
             let sheetID = getCookie("LS2");
             let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
             checkAccAdmin = true;
             var sheetName = 'Class_Detail';
             //up
             var qu_AllData = 'Select B WHERE A = \"K7\"';
+            var queryAllData = encodeURIComponent(qu_AllData);
+            var urlAllData = `${base}&sheet=${sheetName}&tq=${queryAllData}`;
+            fetch(urlAllData)
+            .then(res => res.text())
+            .then(rep => {                
+                const jsData = JSON.parse(rep.substr(47).slice(0, -2));
+                const colz = [];
+                jsData.table.cols.forEach((heading) => {
+                    if (heading.label) {
+                        colz.push(heading.label.toLowerCase().replace(/\s/g, ''));
+                    }
+                })
+                jsData.table.rows.forEach((main) => {
+                    const row = {};
+                    colz.forEach((ele, ind) => {
+                        row[ele] = (main.c[ind] != null) ? main.c[ind].v : '';
+                    })
+                    tmpLstClassSearch.push(row);
+                })
+                lstClassSearch = tmpLstClassSearch;
+                actionLoadListClassSearchResult(lstClassSearch);                
+                return;
+            });
+        }
+        else if(lstClassSearch[i]["class"] == "ALL"){
+            let sheetID = getCookie("LS2");
+            let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
+            checkAccAdmin = true;
+            var sheetName = 'Class_Detail';
+            //up
+            var qu_AllData = 'Select B WHERE A = \"K6\" OR A = \"K7\" OR A = \"K8\"';
             var queryAllData = encodeURIComponent(qu_AllData);
             var urlAllData = `${base}&sheet=${sheetName}&tq=${queryAllData}`;
             fetch(urlAllData)
