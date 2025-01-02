@@ -18,6 +18,7 @@ function init() {
     renderLuaChonCongCu();
     dataAnalysis();
     logOut();
+    //Change Here
     if(urlCurrent.search("IC3GS6LEVEL1.html") != -1){
         urlCurrent = urlCurrent.substring(0,urlCurrent.search("IC3GS6LEVEL1.html")-1);
     }
@@ -73,7 +74,7 @@ function renderNameSchool(data){
 
 function renderNameUsr(){
     var htmlRenderNameUser = "<span style=\"color:blue;\">Họ và tên: </span>" + getCookie("nameUsr");
-    if(getCookie("typeUserDetail") == "K6"){
+    if(getCookie("typeUserDetail") == "K6" || getCookie("typeUserDetail") == "K7" || getCookie("typeUserDetail") == "K8"){
         htmlRenderNameUser = htmlRenderNameUser + "<br>" + "<span style=\"color:blue;\">Lớp: </span>" + getCookie("classOfUser");
     }
    document.getElementById("nameUsr").innerHTML = htmlRenderNameUser;
@@ -82,7 +83,7 @@ function renderNameUsr(){
 function dataAnalysis(){
     var htmlDataAnalysis = "";
     htmlDataAnalysis = "<div><button class=\"btn-data-analysis\" onclick=\"actionDataAnalysis()\"><b>Thống Kê</b></button></div>";
-    if(getCookie("typeUserDetail") == "QL6" || getCookie("typeUserDetail") == "GV6"){
+    if(getCookie("typeUserDetail") == "QL6" || getCookie("typeUserDetail") == "QL7" || getCookie("typeUserDetail") == "QL8" || getCookie("typeUserDetail") == "GV6" || getCookie("typeUserDetail") == "GV7" || getCookie("typeUserDetail") == "GV8"){
         htmlDataAnalysis = htmlDataAnalysis + "<div><button class=\"btn-data-analysis\" style=\"margin-top:5px;\" onclick=\"actionDataAnalysisStudent()\"><b>Kết Quả Học Sinh</b></button></div>";
     }
     document.getElementById("data_analysis").innerHTML = htmlDataAnalysis;
@@ -226,8 +227,10 @@ function getCookie(cname) {
 
 function renderLuaChonCongCu(){
     var htmlSelectTool = "";
-    htmlSelectTool = "<input type=\"radio\" id=\"s1\" name=\"se_tool\" value=\"s1\"> <b><i>Luyện Tập</i></b>&emsp;&ensp;"
-                    + "<input type=\"radio\" id=\"s2\" name=\"se_tool\" value=\"s2\"> <b><i>Thi Thử</i></b><br/>"
+    htmlSelectTool = "<input type=\"radio\" id=\"s1\" name=\"se_tool\" value=\"s1\"> <span style=\"color:#5B46F8;\"><b><i>Luyện Tập</i></b></span>&emsp;&ensp;"
+    //Change Here
+                    + "<input style=\"display:none;\" type=\"radio\" id=\"s3\" name=\"se_tool\" value=\"s3\"> <span style=\"display:none;color:#F8466D;\"><b><i>Luyện Thi</i></b></span>&emsp;&ensp;"
+                    + "<input type=\"radio\" id=\"s2\" name=\"se_tool\" value=\"s2\"> <span style=\"color:#E63C1E;\"><b><i>Thi Thử</i></b></span><br/>"
                     + "<div><button class=\"btn-select-tool\" onclick=\"confirmRenderCongCu()\"><b>OK</b></button></div>";
                     
     document.getElementById("select-tool").innerHTML = htmlSelectTool;
@@ -241,6 +244,10 @@ function confirmRenderCongCu(){
             if(ele[i].value == "s1"){
                 renderCongCu("CC1_LV1", 1);
             }
+            //Change Here
+            // else if(ele[i].value == "s3"){
+            //     renderCongCu("CC3_LV1", 3);
+            // }            
             else if(ele[i].value == "s2"){
                 renderCongCu("CC2_LV1", 2);
             }
@@ -248,6 +255,9 @@ function confirmRenderCongCu(){
         }
     }
     if(checkSelect == false){
+        // Change Here
+        // alert("Bạn hãy chọn \"Luyện Tập\" hoặc \"Luyện Thi\" nhé!");
+        
         alert("Bạn hãy chọn \"Luyện Tập\" hoặc \"Thi Thử\" nhé!");
     }
 }
@@ -282,8 +292,11 @@ function renderCongCu(nameSheet, typeTool){
         if(typeTool == 1){
             renderToWebsite1(dataAll);
         }
-        else{
+        else if(typeTool == 2){
             renderToWebsite2(dataAll);
+        }
+        else{
+            renderToWebsite3(dataAll);
         }        
     });
 }
@@ -341,6 +354,52 @@ function renderToWebsite2(data){
                                 + "<th class=\"table-header-form-real-estate-CongVu\">STT</th>"
                                 + "<th class=\"table-header-form-real-estate-CongVu\">Bộ Đề</th>"
                                 + "<th class=\"table-header-form-real-estate-CongVu\">Thi Thử</th>"
+                                + "</tr>";
+    var typeTodo = "";
+    var titleTodo = "";
+    for(var count = 0; count < data.length; count++){
+        typeTodo = "<button class=\"button-google-form1\" type=\"button\">"+ data[count]['nametodo'] +"</button>";
+        titleTodo = "<span style=\"color:black;font-weight:bold;\">" + data[count]['title'];
+    
+
+        htmlListForm = htmlListForm + "<tr "
+                                    + "id=\"info" + String(count+1) + "\""
+                                    + " class=\"table-row-form-real-estate-CongVu\">"
+                                    + "<td class=\"table-data-form-real-estate-CongVu\" style=\"text-align:center;\">"
+                                    + data[count]['number']
+                                    + "</td>"
+                                    + "<td class=\"table-data-form-real-estate-CongVu\">"
+                                    + titleTodo
+                                    + "</span></td>"
+                                    + "<td class=\"table-data-form-real-estate-CongVu\" style=\"text-align:center;\">"
+                                    + "<a href=\"#info" + String(count+1) + "\" onclick=\"goToLink("
+                                    + "\'"
+                                    + String(data[count]['linktodo1'])
+                                    + "\'"
+                                    + ",\'"
+                                    + String(data[count]['id'])
+                                    + "\'"
+                                    + ",\'"
+                                    + String(data[count]['currenttime'])
+                                    + "\'"
+                                    + ")\">"
+                                    + typeTodo
+                                    + "</a>"
+
+                                    + "</td>"
+                                    + "</tr>"
+    }
+    htmlListForm = htmlListForm + "</table>";
+    document.getElementById("main").innerHTML = htmlListForm;
+}
+
+function renderToWebsite3(data){
+    htmlListForm = "";   
+    htmlListForm = htmlListForm + "<table class=\"table-form-real-estate-CongVu\">"
+                                + "<tr class=\"table-row-form-real-estate-CongVu\">"
+                                + "<th class=\"table-header-form-real-estate-CongVu\">STT</th>"
+                                + "<th class=\"table-header-form-real-estate-CongVu\">Chủ Đề</th>"
+                                + "<th class=\"table-header-form-real-estate-CongVu\">Luyện Thi</th>"
                                 + "</tr>";
     var typeTodo = "";
     var titleTodo = "";
