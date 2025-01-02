@@ -18,10 +18,16 @@ function checkCookie() {
     let sheetID = getCookie("LS2");
     let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
     let ur = getCookie("usr");
+    let idTool = getCookie("ID");
     var sheetName = 'LogIn1';
     var qu_AllData = 'Select A, D, G, H, I WHERE A = \"' + ur + '\"';
     var queryAllData = encodeURIComponent(qu_AllData);
     var urlAllData = `${base}&sheet=${sheetName}&tq=${queryAllData}`;
+    
+    //Cần Code lại phần check làm bài này!!!   
+    if(ur == '' || idTool == ''){
+        backToLogInPage();
+    }
     fetch(urlAllData)
     .then(res => res.text())
     .then(rep => {                
@@ -113,13 +119,19 @@ function saveInfo(ID){
     if(ID.slice(ID.search("_")+1,ID.search("_")+3) == "LT"){
         nameSheet = "CC1_" + ID.slice(0,ID.search("_"));
     }
-    else{
+    else if(ID.slice(ID.search("_")+1,ID.search("_")+3) == "TT"){
         nameSheet = "CC2_" + ID.slice(0,ID.search("_"));
     }
+    else{
+        nameSheet = "CC3_" + ID.slice(0,ID.search("_"));
+    }
+    
     var qu_AllData = 'Select H WHERE B = \"' + ID + '\"';
     var queryAllData = encodeURIComponent(qu_AllData);
+    let sheetID = getCookie("LS1")
+    let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
     var urlAllData = `${base}&sheet=${nameSheet}&tq=${queryAllData}`;
-    dataAll = [];
+        
     fetch(urlAllData)
     .then(res => res.text())
     .then(rep => {                
@@ -138,6 +150,7 @@ function saveInfo(ID){
             })
             data1 = Object.keys(row).map((key) => [key, row[key]]);
             STime_CC = data1[0][1].toString();
+            
             setCookie("usr", user1, 8);
             setCookie("nameUsr", uFullName, 8);
             setCookie("typeUserDetail", typeUserDetail, 8);
@@ -154,6 +167,7 @@ function backToLogInPage(){
 }
 
 function backToToolPage(){
+    alert("Bạn cần chọn lại bài làm!");
     window.location.href = linkBackToToolPage;
 }
 
