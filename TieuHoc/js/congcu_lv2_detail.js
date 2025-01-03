@@ -19,7 +19,7 @@ function checkCookie() {
     let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
     let ur = getCookie("usr");
     let idTool = getCookie("ID");
-    var sheetName = 'LogIn1';
+    var sheetName = 'LogIn2';
     var qu_AllData = 'Select A, D, G, H, I WHERE A = \"' + ur + '\"';
     var queryAllData = encodeURIComponent(qu_AllData);
     var urlAllData = `${base}&sheet=${sheetName}&tq=${queryAllData}`;
