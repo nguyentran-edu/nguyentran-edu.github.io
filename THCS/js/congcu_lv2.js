@@ -194,6 +194,10 @@ function checkLogIn1(ur){
     }
     else{
         console.log("4");
+        console.log("user1: ");
+        console.log(user1);
+        console.log("ur: ");
+        console.log(ur);
         backToLogInPage();
     }
 }
