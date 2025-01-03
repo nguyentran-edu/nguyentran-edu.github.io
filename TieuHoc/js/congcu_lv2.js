@@ -242,14 +242,14 @@ function confirmRenderCongCu(){
     for (i = 0; i < ele.length; i++) {
         if (ele[i].checked){
             if(ele[i].value == "s1"){
-                renderCongCu("CC1_LV1", 1);
+                renderCongCu("CC1_LV2", 1);
             }
             //Change Here
             // else if(ele[i].value == "s3"){
-            //     renderCongCu("CC3_LV1", 3);
+            //     renderCongCu("CC3_LV2", 3);
             // }            
             else if(ele[i].value == "s2"){
-                renderCongCu("CC2_LV1", 2);
+                renderCongCu("CC2_LV2", 2);
             }
             checkSelect = true;
         }
