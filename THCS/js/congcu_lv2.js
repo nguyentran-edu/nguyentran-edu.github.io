@@ -161,20 +161,17 @@ function checkLogIn1(ur){
     var currentDate = new Date();
     if(user1 == ur){
         if(currentDate.getUTCFullYear() > Number(end_time1.slice(5,9))){
-            console.log("1");
             backToLogInPage();
         }
         else if(currentDate.getUTCFullYear() == Number(end_time1.slice(5,9))){
             var strMonth_Day_Tmp = end_time1.slice(end_time1.indexOf(",")+1,end_time1.length-1);
             var strMonth = strMonth_Day_Tmp.slice(0,strMonth_Day_Tmp.indexOf(","));
             if(currentDate.getUTCMonth() > Number(strMonth)){
-                console.log("2");
                 backToLogInPage();
             }
             else if(currentDate.getUTCMonth() == Number(strMonth)){
                 var strDay = strMonth_Day_Tmp.slice(strMonth_Day_Tmp.indexOf(",")+1,strMonth_Day_Tmp.length);
                 if(currentDate.getUTCDate() > Number(strDay)){
-                    console.log("3");
                     backToLogInPage();
                 }
                 else{                    
@@ -193,11 +190,6 @@ function checkLogIn1(ur){
         }  
     }
     else{
-        console.log("4");
-        console.log("user1: ");
-        console.log(user1);
-        console.log("ur: ");
-        console.log(ur);
         backToLogInPage();
     }
 }
