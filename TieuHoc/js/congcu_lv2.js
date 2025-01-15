@@ -74,7 +74,7 @@ function renderNameSchool(data){
 
 function renderNameUsr(){
     var htmlRenderNameUser = "<span style=\"color:blue;\">Họ và tên: </span>" + getCookie("nameUsr");
-    if(getCookie("typeUserDetail") == "K6" || getCookie("typeUserDetail") == "K7" || getCookie("typeUserDetail") == "K8"){
+    if(getCookie("typeUserDetail") == "K3" || getCookie("typeUserDetail") == "K4" || getCookie("typeUserDetail") == "K5"){
         htmlRenderNameUser = htmlRenderNameUser + "<br>" + "<span style=\"color:blue;\">Lớp: </span>" + getCookie("classOfUser");
     }
    document.getElementById("nameUsr").innerHTML = htmlRenderNameUser;
@@ -83,7 +83,7 @@ function renderNameUsr(){
 function dataAnalysis(){
     var htmlDataAnalysis = "";
     htmlDataAnalysis = "<div><button class=\"btn-data-analysis\" onclick=\"actionDataAnalysis()\"><b>Thống Kê</b></button></div>";
-    if(getCookie("typeUserDetail") == "QL6" || getCookie("typeUserDetail") == "QL7" || getCookie("typeUserDetail") == "QL8" || getCookie("typeUserDetail") == "GV6" || getCookie("typeUserDetail") == "GV7" || getCookie("typeUserDetail") == "GV8"){
+    if(getCookie("typeUserDetail") == "QL3" || getCookie("typeUserDetail") == "QL4" || getCookie("typeUserDetail") == "QL5" || getCookie("typeUserDetail") == "GV3" || getCookie("typeUserDetail") == "GV4" || getCookie("typeUserDetail") == "GV5"){
         htmlDataAnalysis = htmlDataAnalysis + "<div><button class=\"btn-data-analysis\" style=\"margin-top:5px;\" onclick=\"actionDataAnalysisStudent()\"><b>Kết Quả Học Sinh</b></button></div>";
     }
     document.getElementById("data_analysis").innerHTML = htmlDataAnalysis;
