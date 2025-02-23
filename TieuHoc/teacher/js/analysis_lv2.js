@@ -81,7 +81,7 @@ function getListClassSearch(){
   let sheetID = getCookie("LS2");
   let base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`;
   lstClassSearch = [];
-  var sheetName = 'QL_GV_K3';
+  var sheetName = 'QL_GV_K4';
   var qu_AllData = 'Select A, D WHERE A = \"' + getCookie("usr") + '\"';
   var queryAllData = encodeURIComponent(qu_AllData);
   var urlAllData = `${base}&sheet=${sheetName}&tq=${queryAllData}`;
@@ -338,7 +338,7 @@ function renderToTableDataAnalysis(lstLoadData){
       rowOfFileCSV = "THỐNG KÊ KẾT QUẢ";
       fileCSVContent += rowOfFileCSV + "\r\n";
       //Up
-      rowOfFileCSV = "Công Cụ Luyện Thi IC3 GS6 Spark Level 1 - K3";
+      rowOfFileCSV = "Công Cụ Luyện Thi IC3 GS6 Spark Level 2";
       fileCSVContent += rowOfFileCSV + "\r\n";
       
       rowOfFileCSV = "Bài: " + titleUnit;
